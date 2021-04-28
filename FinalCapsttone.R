@@ -34,8 +34,12 @@ colnames(Rides) <- gsub("[\r\n -]","",colnames(Rides))
 Rides = Rides[-c(2548,2549),] #remove the improperly formatted rows
 
 #make the unperformed ride column
+Rides$PerformedDrive <- ifelse(Rides$Dropoff.Perform == "", 0, 1)
 
-Rides$PerformedDrive <- ifelse(Rides$Dropoff.Perform == is.null((Rides$Dropoff.Perform)),0,1)
 
-unique(Rides$PerformedDrive)
+#Variables for Forest
+#Req. Pickup, Space, Charge, Type, Funding.Source, Distance, Run, Pickup.Adress.1,
+#Pickup.perform, Difference between Req. Pickup Time and Pickup Perform Time, Pickup.city, Pickup.state, Pickup.zip,
+#Dropoff.Address1, Dropoff.city, dropoff.zip, dropoff.state, Routed.distance, import.distance
 
+# Target Variable = PerformedDrive
