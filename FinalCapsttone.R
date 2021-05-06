@@ -63,7 +63,224 @@ Rides$Charge <- as.numeric(Rides$Distance)
 sapply(Rides, function(x) sum(is.na(x)))
 
 str(Rides)
+       
 
+View(Drivers)
+Drivers$Trips <- as.numeric(Drivers$Trips)
+Drivers$TripRevenue <- as.numeric(Drivers$TripRevenue)
+Drivers$TotalRevenue <- as.numeric(Drivers$TotalRevenue)
+Drivers$TotalMiles <- as.numeric(Drivers$TotalMiles)
+Drivers$CapacitatedMiles <- as.numeric(Drivers$CapacitatedMiles)
+Drivers$EmptyMiles <- as.numeric(Drivers$EmptyMiles)
+
+str(Drivers)
+
+View(Area)
+Area$Trips <- as.numeric(Area$Trips)
+Area$TripRevenue <- as.numeric(Area$TripRevenue)
+Area$TotalRevenue <- as.numeric(Area$TotalRevenue)
+Area$TotalMiles <- as.numeric(Area$TotalMiles)
+Area$CapacitatedMiles <- as.numeric(Area$CapacitatedMiles)
+Area$EmptyMiles <- as.numeric(Area$EmptyMiles)
+
+########------Area Dataframe (By Date wkst) Graphs------
+#Graph 1: Trips vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = Trips, y = TotalRevenue)) +
+  ggtitle("Relation between Trips and Total Revenue (from Area dataframe") +
+  labs(x = "Number of Trips",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 2: Performed vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = Performed, y = TotalRevenue)) +
+  ggtitle("Relation between Number of Performed Trips and Total Revenue (from Area dataframe") +
+  labs(x = "Number of Performed Trips",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 3: Unperformed vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = Unperformed, y = TotalRevenue)) +
+  ggtitle("Relation between Number of Unperformed Trips and Total Revenue (from Area dataframe") +
+  labs(x = "Number of Unperformed Trips",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 4: AdvanceCancels vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = AdvanceCancels, y = TotalRevenue)) +
+  ggtitle("Relation between Number of Advanced Cancels and Total Revenue (from Area dataframe") +
+  labs(x = "Number of Advanced Cancels",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+#Graphs 3 & 4 are very similar in terms of actual data
+
+#Graph 5: DriverCancels vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = DriverCanceles, y = TotalRevenue)) +
+  ggtitle("Relation between Number of Driver Canceles and Total Revenue (from Area dataframe") +
+  labs(x = "Number of Driver Canceles",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+#Graph 5 has a typo. Cancels vs Canceles
+
+#Graph 6: RevenuePerMile vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = RevenuePerMile, y = TotalRevenue)) +
+  ggtitle("Relation between Revenue Per Mile and Total Revenue (from Area dataframe") +
+  labs(x = "Revenue Per Mile",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 7: RevenuePerCapacitatedMile vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = RevenuePerCapacitatedMile, y = TotalRevenue)) +
+  ggtitle("Relation between Revenue Per Capacitated Mile and Total Revenue (from Area dataframe") +
+  labs(x = "Revenue Per Capacitated Mile",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 8: TotalMiles vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = TotalMiles, y = TotalRevenue)) +
+  ggtitle("Relation between Total Miles and Total Revenue (from Area dataframe") +
+  labs(x = "Total Miles",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 9: CapacitatedMiles vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = CapacitatedMiles, y = TotalRevenue)) +
+  ggtitle("Relation between Capacitated Miles and Total Revenue (from Area dataframe") +
+  labs(x = "Capacitated Miles",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 10: EmptyMiles vs Total Revenue (Area dataframe)
+ggplot(data = Area) +
+  geom_point(aes(x = EmptyMiles, y = TotalRevenue)) +
+  ggtitle("Relation between Empty Miles and Total Revenue (from Area dataframe") +
+  labs(x = "Empty Miles",
+       y = "Total Revenue") + 
+  scale_fill_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("TotalRevenue") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+
+########------Rides Dataframe (By Individual Ride wkst) Graphs-------
+
+#Graph 1: Space vs PerformedDrive
+ggplot(data = Rides) +
+  geom_bar(aes(x = Space, fill = PerformedDrive), position="fill") +
+  ggtitle("Relation Between Space and PerformedDrive") +
+  labs(x = "Space",
+       y = "Proportional Amount") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 2: Charge vs PerformedDrive
+ggplot(data = Rides) +
+  geom_point(aes(x = Charge, y = PerformedDrive)) +
+  ggtitle("Relation Between Charge and PerformedDrive") +
+  labs(x = "Space",
+       y = "PerformedDrive") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 3: Type vs PerformedDrive
+ggplot(data = Rides) +
+  geom_bar(aes(x = Type, fill = PerformedDrive), position="fill") +
+  ggtitle("Relation Between Type and PerformedDrive") +
+  labs(x = "Type",
+       y = "Proportional Amount") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 4: Distance vs PerformedDrive
+ggplot(data = Rides) +
+  geom_point(aes(x = Distance, y = PerformedDrive)) +
+  ggtitle("Relation Between Distance and PerformedDrive") +
+  labs(x = "Distance",
+       y = "PerformedDrive") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+#Graph 4 very similar to Graph 2 in terms of data
+
+#Graph 5: Run vs PerformedDrive
+ggplot(data = Rides) +
+  geom_bar(aes(x = Run, fill = PerformedDrive), position="fill") +
+  ggtitle("Relation Between Run and PerformedDrive") +
+  labs(x = "Run",
+       y = "Proportional Amount") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw() +
+  coord_flip()
+#Graph 5 Last two bars????
+
+#Graph 6: PickupState vs PerformedDrive
+ggplot(data = Rides) +
+  geom_bar(aes(x = PickupState, fill = PerformedDrive), position="fill") +
+  ggtitle("Relation Between Pickup State and PerformedDrive") +
+  labs(x = "Pickup State",
+       y = "Proportional Amount") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 7: DropoffState vs PerformedDrive
+ggplot(data = Rides) +
+  geom_bar(aes(x = DropoffState, fill = PerformedDrive), position="fill") +
+  ggtitle("Relation Between Dropoff State and PerformedDrive") +
+  labs(x = "Dropoff State",
+       y = "Proportional Amount") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 8: RoutedDistance vs PerformedDrive
+ggplot(data = Rides) +
+  geom_point(aes(x = RoutedDistance, y = PerformedDrive)) +
+  ggtitle("Relation Between Routed Distance and PerformedDrive") +
+  labs(x = "Routed Distance",
+       y = "PerformedDrive") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
+
+#Graph 9: ImportDistance vs PerformedDrive
+ggplot(data = Rides) +
+  geom_point(aes(x = ImportDistance, y = PerformedDrive)) +
+  ggtitle("Relation Between Import Distance and PerformedDrive") +
+  labs(x = "Import Distance",
+       y = "PerformedDrive") + 
+  scale_fill_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  scale_colour_grey("PerformedDrive") + # use only greyscale (always colorblind friendly)
+  theme_bw()
 ###-------BASELINE FOREST----------------------
 #set the seed
 RNGkind(sample.kind = "default")
