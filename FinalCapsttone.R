@@ -83,6 +83,48 @@ myforest = randomForest(PerformedDrive ~ Space + Charge + Type
                         mtry = 4, #choose m - sqrt(16) = 4
                         importance = TRUE) #importance can help us identify important predictors (later)
 
+###-------TUNING FOREST----------------------
+mtry <- c(1:16)
+
+#make room for B, OOB error
+Rides2 <- data.frame(m = rep(NA,length(mtry)),
+                     OOB_err_rate = rep(NA, length(mtry)))
+
+for (idx in 1:length(mtry)){
+  print(paste0("Trying m = ", mtry[idx]))
+  tempforest<- randomForest(PerformedDrive ~ Space + Charge + Type
+                            + Distance + Run
+                            + PickupState
+                            + DropoffState + RoutedDistance + ImportDistance,
+                            data = train.df, 
+                            ntree = 1000, # fixed B value
+                            mtry = mtry[idx]) # mtry is varying
+  #record iteration's m value
+  Rides2[idx, "m"] <- mtry[idx]
+  #record what our OOB error rate was
+  #note code that grabs OOB error rate - this approximates out of sample error
+  Rides2[idx,"OOB_err_rate"] <- mean(predict(tempforest)!= train.df$PerformedDrive)
+  
+}
+
+
+#plot you can use to justify your chosen tuning parameters
+qplot(m, OOB_err_rate, geom = c("line", "point"), data = Rides2) + 
+  theme_bw() + labs(x = "m (mtry) value", y = "OOB error rate") +
+  scale_x_continuous(breaks=seq(0,16), by=1)
+# Plot shows mtry = 4 results in lowest OOB error
+
+#Final forest based on tuning:
+final_forest<- randomForest(PerformedDrive ~ Space + Charge + Type
+                            + Distance + Run
+                            + PickupState
+                            + DropoffState + RoutedDistance + ImportDistance,
+                            data = train.df, 
+                            ntree = 1000, 
+                            mtry = 2,#based on tuning
+                            importance = TRUE)
+
+
 # Descriptive Models -----------------------------------------------------------
 m1 = glm(Rides$PerformedDrive ~  Rides$Space + Rides$Charge + Rides$Type + Rides$FundingSource + Rides$Distance
          + Rides$Run + Rides$PickupCity + Rides$PickupState
