@@ -124,6 +124,18 @@ final_forest<- randomForest(PerformedDrive ~ Space + Charge + Type
                             mtry = 2,#based on tuning
                             importance = TRUE)
 
+       
+#make a column of predictions on the test set
+test.df$forest_pred <- predict(final_forest, test.df, type = "class")
+#confusion matrix where pi* = 0.5, as with trees
+table(test.df$forest_pred, test.df$PerformedDrive)
+#Create ROC Curve assuming 'positive event' is W
+pi_hat <- predict(final_forest, test.df, type = "prob")[,"Yes"]
+rocCurve <- roc(response = test.df$PerformedDrive, #truth
+                predictor = pi_hat, #probabilities of positive event W
+                levels = c("0", "1")) #(negative event, positive event)
+
+plot(rocCurve,print.thres = TRUE, print.auc=TRUE)
 
 # Descriptive Models -----------------------------------------------------------
 m1 = glm(Rides$PerformedDrive ~  Rides$Space + Rides$Charge + Rides$Type + Rides$FundingSource + Rides$Distance
